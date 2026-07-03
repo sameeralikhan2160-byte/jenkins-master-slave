@@ -1,0 +1,55 @@
+<svg width="680" height="480" viewBox="0 0 680 480" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Jenkins master-slave architecture on AWS EC2</title>
+<desc>A VPC in ap-south-1 containing two EC2 instances: jenkins-master running the Jenkins controller on port 8080, and jenkins-slave which executes builds. They connect over SSH on port 22. An external user accesses the Jenkins web UI over HTTP/8080.</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#3d3d3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+<rect width="680" height="480" fill="#ffffff"/>
+
+<!-- External user -->
+<rect x="270" y="20" width="140" height="44" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text x="340" y="42" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="14" font-weight="500" fill="#2C2C2A">Browser</text>
+
+<line x1="340" y1="64" x2="340" y2="100" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="340" y="82" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">HTTP :8080</text>
+
+<!-- VPC container -->
+<rect x="40" y="100" width="600" height="340" rx="20" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="60" y="128" font-family="sans-serif" font-size="14" font-weight="500" fill="#04342C">AWS VPC</text>
+<text x="60" y="146" font-family="sans-serif" font-size="12" fill="#0F6E56">ap-south-1 (Mumbai)</text>
+
+<!-- Master node -->
+<rect x="90" y="180" width="230" height="200" rx="12" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="205" y="205" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#042C53">jenkins-master</text>
+<text x="205" y="222" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#185FA5">172.31.12.241</text>
+
+<rect x="110" y="240" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="205" y="257" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">Jenkins controller :8080</text>
+
+<rect x="110" y="282" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="205" y="299" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">OpenJDK 21</text>
+
+<rect x="110" y="324" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="205" y="341" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">jenkins user, SSH keypair</text>
+
+<!-- Slave node -->
+<rect x="360" y="180" width="230" height="200" rx="12" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text x="475" y="205" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="500" fill="#4A1B0C">jenkins-slave</text>
+<text x="475" y="222" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#993C1D">172.31.10.207</text>
+
+<rect x="380" y="240" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="475" y="257" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">jenkins system user</text>
+
+<rect x="380" y="282" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="475" y="299" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">Executes build (myslave node)</text>
+
+<rect x="380" y="324" width="190" height="34" rx="6" fill="#ffffff" stroke="#B4B2A9" stroke-width="0.5"/>
+<text x="475" y="341" text-anchor="middle" dominant-baseline="central" font-family="sans-serif" font-size="12" fill="#2C2C2A">/var/lib/jenkins/workspace</text>
+
+<!-- Connection between master and slave -->
+<line x1="320" y1="280" x2="358" y2="280" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="339" y="266" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">SSH :22</text>
+
+<!-- Security group note -->
+<text x="340" y="415" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5F5E5A">Security group jenkins-sec: 22 (SSH), 80 (HTTP), 8080 (Jenkins UI)</text>
+</svg>
