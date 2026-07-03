@@ -40,7 +40,6 @@ Jenkins requires Java to run, so OpenJDK 21 was installed first:
 ```bash
 sudo apt install openjdk-21-jdk -y
 ```
-![Installing OpenJDK 21](images/02-install-openjdk-21.png)
 
 ### 3. Install Jenkins on the Master
 Added the official Jenkins Debian repository and installed it:
@@ -55,7 +54,6 @@ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc]" \
 sudo apt update
 sudo apt install jenkins -y
 ```
-![Installing Jenkins from the official repo](images/03-install-jenkins-repo.png)
 
 Verified the service was active:
 ```bash
@@ -72,10 +70,6 @@ sudo systemctl status jenkins
 - Retrieved the initial admin password from `/var/lib/jenkins/secrets/initialAdminPassword`
 - Created the first admin user through the **Getting Started** wizard
 
-![Create first admin user](images/06-jenkins-create-admin-user.png)
-
-![Jenkins welcome dashboard](images/07-jenkins-welcome-dashboard.png)
-
 ### 5. Prepare the Slave Node
 On the `jenkins-slave` instance, a dedicated **`jenkins`** system user was created (this is the user the master will SSH into and run builds as):
 ```bash
@@ -83,7 +77,6 @@ sudo useradd -m -d /var/lib/jenkins -s /bin/bash jenkins
 sudo passwd jenkins
 sudo nano /etc/sudoers
 ```
-![Creating the jenkins user on the slave](images/08-create-jenkins-user-on-slave.png)
 
 ### 6. Generate SSH Keys on the Master
 Switched to the `jenkins` user on the master and generated an SSH key pair to authenticate with the slave:
@@ -93,8 +86,6 @@ ssh-keygen
 This created `id_ed25519` (private) and `id_ed25519.pub` (public) inside `/var/lib/jenkins/.ssh/`.
 
 ![Generating the SSH key pair on the master](images/09-ssh-keygen-on-master.png)
-
-![SSH key files generated](images/10-ssh-key-files-generated.png)
 
 ### 7. Connect Master to Slave
 The public key was copied over to the slave's `authorized_keys`, and connectivity was verified with a manual SSH login:
@@ -123,8 +114,6 @@ Build Executor Status
  └── myslave         0/1
 ```
 
-![myslave node online in Jenkins](images/13-jenkins-myslave-node-online.png)
-
 ### 10. Run a Test Job on the Slave
 Created a Freestyle project (`myfirstjob`) and restricted it to run on the `myslave` node. The build executed successfully:
 
@@ -135,8 +124,6 @@ jenkins
 /var/lib/jenkins/workspace/myfirstjob
 Finished: SUCCESS
 ```
-
-![Freestyle job build successful](images/14-freestyle-job-build-success.png)
 
 ![Console output showing the build ran on myslave](images/15-console-output-build-on-slave.png)
 
